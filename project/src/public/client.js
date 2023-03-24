@@ -104,3 +104,21 @@ const getImageOfTheDay = (state) => {
 
   return data;
 };
+const getRoverPhotos = () => {
+  return fetch(`http://localhost:3000/rover`)
+    .then((res) => res.json())
+    .then((res) => console.log(res))
+    .catch((error) => console.error(error));
+};
+
+let roverPhotos = () => {
+  getRoverPhotos().then((payload) => {
+    roverPhotos = () => {
+      payload.photos.map((photo, i, array) => getRoverPhotos(photo, i, array));
+    };
+  });
+  return roverPhotos;
+};
+
+const testing = roverPhotos();
+console.log(testing);

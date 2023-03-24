@@ -26,14 +26,21 @@ app.get("/apod", async (req, res) => {
   }
 });
 
-const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
-let roverPhotos = fetch(url)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    roverPhotos = data;
-    console.log(roverPhotos.photos[0]);
-  });
+app.get("/rover", async (req, res) => {
+  try {
+    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
+    let roverPhotos = fetch(url)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        roverPhotos = data;
+        //console.log(roverPhotos.photos[0]);
+        res.send({ roverPhotos });
+      });
+  } catch (err) {
+    console.log("error:", err);
+  }
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
