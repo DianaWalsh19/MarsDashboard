@@ -40,10 +40,8 @@ const App = (state) => {
             </section>
             <input id="searchTerm" type="text" placeholder="Enter search term" />
             <button id="btn">Search</button>
-            <div id="roverPhotos">
-            
-            </div>
-     
+            <div id="roverPhotos"></div>
+            <div id="grid"></div>
         </main>
         <footer></footer>
     `;
@@ -120,10 +118,31 @@ const getImageOfTheDay = (state) => {
   const response = await fetch(`http://localhost:3000/rover`);
   const data = await response.json();
   console.log(data.roverPhotos.photos[0]);
-  displayRoverPhotos(data.roverPhotos.photos[0]);
+  displayRoverPhotos(data.roverPhotos.photos);
 })();
 
+// Create Grid to display photos
+
 function displayRoverPhotos(data) {
-  document.getElementById("roverPhotos").innerHTML = `<h3>This is my photo</h3>
-  <img src=${data.img_src} alt="rover" width="50%">`;
+  const grid = document.getElementById("grid");
+  grid.className = "grid-container";
+  // const tableSize = { x: 3, y: 3 };
+  // let total = tableSize.x * tableSize.y;
+
+  for (let i = 0; i < data.length; i++) {
+    const html = `      
+      <div>
+        <h3>${data[i].rover.name}</h3>
+        <img src="${data[i].img_src}">
+      </div>`;
+    const gridCell = cellMaker(grid, html);
+  }
+  grid.style.setProperty(`grid-template-columns`, `repeat(${data.length},2fr)`);
+}
+
+function cellMaker(parent, html) {
+  const cell = document.createElement("div");
+  cell.className = "grid-item";
+  cell.innerHTML = html;
+  return parent.appendChild(cell);
 }
