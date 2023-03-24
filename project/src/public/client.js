@@ -26,6 +26,7 @@ const App = (state) => {
             ${Greeting(store.user.name)}
             <section>
                 <h3>Put things on the page!</h3>
+                
                 <p>Here is an example section.</p>
                 <p>
                     One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
@@ -37,9 +38,12 @@ const App = (state) => {
                 </p>
                 ${ImageOfTheDay(apod)}
             </section>
-            <section>
-              
-            </section>
+            <input id="searchTerm" type="text" placeholder="Enter search term" />
+            <button id="btn">Search</button>
+            <div id="roverPhotos">
+            
+            </div>
+     
         </main>
         <footer></footer>
     `;
@@ -105,9 +109,21 @@ const getImageOfTheDay = (state) => {
   return data;
 };
 
-(function getRoverPhotos() {
-  return fetch(`http://localhost:3000/rover`)
-    .then((res) => res.json())
-    .then((res) => console.log(res))
-    .catch((error) => console.error(error));
+// const button = document.getElementById("btn");
+// button.addEventListener("click", () => {
+//   console.log("button pressed");
+//   getRoverPhotos();
+// });
+
+//An asynchronous function to fetch data from the API.
+(async function getRoverPhotos() {
+  const response = await fetch(`http://localhost:3000/rover`);
+  const data = await response.json();
+  console.log(data.roverPhotos.photos[0]);
+  displayRoverPhotos(data.roverPhotos.photos[0]);
 })();
+
+function displayRoverPhotos(data) {
+  document.getElementById("roverPhotos").innerHTML = `<h3>This is my photo</h3>
+  <img src=${data.img_src} alt="rover" width="50%">`;
+}
