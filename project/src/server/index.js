@@ -27,8 +27,11 @@ app.get("/apod", async (req, res) => {
 });
 
 app.get("/rover", async (req, res) => {
+  // const roverName = req.body;
+  // console.log(roverName);
+  const roverName = "opportunity";
   try {
-    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
+    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
     let roverPhotos = fetch(url)
       .then((res) => {
         return res.json();

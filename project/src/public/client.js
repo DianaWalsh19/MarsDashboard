@@ -146,3 +146,12 @@ function cellMaker(parent, html) {
   cell.innerHTML = html;
   return parent.appendChild(cell);
 }
+
+// TODO: An option to get fedeback from user
+// on what Rover they want to see.
+
+// TODO: A function to send the selected rover to
+// the back end
+
+// TODO: A way to make the API requirement dynamic, so it
+// displays the different rovers
