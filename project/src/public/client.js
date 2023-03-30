@@ -113,13 +113,21 @@ const getImageOfTheDay = (state) => {
 //   getRoverPhotos();
 // });
 
+//const roverName = "Curiosity";
 //An asynchronous function to fetch data from the API.
-(async function getRoverPhotos() {
-  const response = await fetch(`http://localhost:3000/rover`);
+async function getRoverPhotos(roverName) {
+  const response = await fetch(`http://localhost:3000/rover`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ roverName }),
+  });
   const data = await response.json();
   console.log(data.roverPhotos.photos[0]);
   displayRoverPhotos(data.roverPhotos.photos);
-})();
+}
+getRoverPhotos((roverName = "Curiosity"));
 
 // Create Grid to display photos
 

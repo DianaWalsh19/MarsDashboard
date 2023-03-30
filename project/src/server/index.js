@@ -26,10 +26,11 @@ app.get("/apod", async (req, res) => {
   }
 });
 
-app.get("/rover", async (req, res) => {
-  // const roverName = req.body;
-  // console.log(roverName);
-  const roverName = "opportunity";
+app.post("/rover", async (req, res) => {
+  const initialResponse = await req.body.roverName;
+  const roverName = initialResponse.toLowerCase();
+  console.log("This is the rover name: " + JSON.stringify(roverName));
+  //const roverName = "opportunity";
   try {
     const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
     let roverPhotos = fetch(url)
