@@ -116,12 +116,6 @@ const getImageOfTheDay = (state) => {
   }
 };
 
-// const button = document.getElementById("curiosity");
-// button.addEventListener("click", () => {
-//   console.log("button pressed: " + button.id);
-//   getRoverPhotos((roverName = button.id));
-// });
-
 function addRoverButtonListeners() {
   const buttons = document.querySelectorAll(
     "#curiosity, #opportunity, #spirit"
