@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
 const path = require("path");
+const moment = require("moment");
 
 const app = express();
 const port = 3000;
@@ -29,10 +30,12 @@ app.get("/apod", async (req, res) => {
 app.post("/rover", async (req, res) => {
   const initialResponse = await req.body.roverName;
   const roverName = initialResponse.toLowerCase();
+  let date = new moment().subtract(10, "days");
+  date = date.format("YYYY-M-DD");
+  console.log(date);
   console.log("This is the rover name: " + JSON.stringify(roverName));
-  //const roverName = "opportunity";
   try {
-    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`;
+    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${process.env.API_KEY}`;
     let roverPhotos = fetch(url)
       .then((res) => {
         return res.json();

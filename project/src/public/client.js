@@ -113,7 +113,6 @@ const getImageOfTheDay = (state) => {
 //   getRoverPhotos();
 // });
 
-//const roverName = "Curiosity";
 //An asynchronous function to fetch data from the API.
 async function getRoverPhotos(roverName) {
   const response = await fetch(`http://localhost:3000/rover`, {
