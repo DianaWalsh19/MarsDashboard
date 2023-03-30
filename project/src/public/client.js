@@ -38,8 +38,6 @@ const App = (state) => {
                 </p>
                 ${ImageOfTheDay(apod)}
             </section>
-            <input id="searchTerm" type="text" placeholder="Enter search term" />
-            <button id="btn">Search</button>
             <div id="roverPhotos"></div>
             <div id="grid"></div>
         </main>
@@ -107,11 +105,11 @@ const getImageOfTheDay = (state) => {
   return data;
 };
 
-// const button = document.getElementById("btn");
-// button.addEventListener("click", () => {
-//   console.log("button pressed");
-//   getRoverPhotos();
-// });
+const button = document.getElementById("btn");
+button.addEventListener("click", () => {
+  console.log("button pressed");
+  getRoverPhotos((roverName = "Curiosity"));
+});
 
 //An asynchronous function to fetch data from the API.
 async function getRoverPhotos(roverName) {
@@ -126,7 +124,7 @@ async function getRoverPhotos(roverName) {
   console.log(data.roverPhotos.photos[0]);
   displayRoverPhotos(data.roverPhotos.photos);
 }
-getRoverPhotos((roverName = "Curiosity"));
+//getRoverPhotos((roverName = "Curiosity"));
 
 // Create Grid to display photos
 
