@@ -19,6 +19,7 @@ const render = async (root, state) => {
 // create content
 const App = (state) => {
   let { rovers, apod } = state;
+  addRoverButtonListeners();
 
   return `
         <header></header>
@@ -38,8 +39,10 @@ const App = (state) => {
                 </p>
                 ${ImageOfTheDay(apod)}
             </section>
-            <div id="roverPhotos"></div>
-            <div id="grid"></div>
+            <section>
+              <div id="roverPhotos"></div>
+              <div id="grid"></div>
+            </section>
         </main>
         <footer></footer>
     `;
@@ -105,11 +108,24 @@ const getImageOfTheDay = (state) => {
   return data;
 };
 
-const button = document.getElementById("curiosity");
-button.addEventListener("click", () => {
-  console.log("button pressed: " + button.id);
-  getRoverPhotos((roverName = button.id));
-});
+// const button = document.getElementById("curiosity");
+// button.addEventListener("click", () => {
+//   console.log("button pressed: " + button.id);
+//   getRoverPhotos((roverName = button.id));
+// });
+
+function addRoverButtonListeners() {
+  const buttons = document.querySelectorAll(
+    "#curiosity, #opportunity, #spirit"
+  );
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // console.log("button pressed: " + button.id);
+      getRoverPhotos(button.id);
+    });
+  });
+}
 
 //An asynchronous function to fetch data from the API.
 async function getRoverPhotos(roverName) {
@@ -121,10 +137,9 @@ async function getRoverPhotos(roverName) {
     body: JSON.stringify({ roverName }),
   });
   const data = await response.json();
-  console.log(data.roverPhotos.photos[0]);
+  // console.log(data.roverPhotos.photos[0]);
   displayRoverPhotos(data.roverPhotos.photos);
 }
-//getRoverPhotos((roverName = "Curiosity"));
 
 // Create Grid to display photos
 
