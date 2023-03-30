@@ -105,10 +105,10 @@ const getImageOfTheDay = (state) => {
   return data;
 };
 
-const button = document.getElementById("btn");
+const button = document.getElementById("curiosity");
 button.addEventListener("click", () => {
-  console.log("button pressed");
-  getRoverPhotos((roverName = "Curiosity"));
+  console.log("button pressed: " + button.id);
+  getRoverPhotos((roverName = button.id));
 });
 
 //An asynchronous function to fetch data from the API.
