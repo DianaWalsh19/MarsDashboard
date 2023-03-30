@@ -73,25 +73,29 @@ const ImageOfTheDay = (apod) => {
   // If image does not already exist, or it is not from today -- request it again
   const today = new Date();
   const photodate = new Date(apod.date);
-  console.log(photodate.getDate(), today.getDate());
+  //console.log(photodate.getDate(), today.getDate());
 
-  console.log(photodate.getDate() === today.getDate());
-  if (!apod || apod.date === today.getDate()) {
-    getImageOfTheDay(store);
-  }
+  //console.log(photodate.getDate() === today.getDate());
+  try {
+    if (!apod || apod.date === today.getDate()) {
+      getImageOfTheDay(store);
+    }
 
-  // check if the photo of the day is actually type video!
-  if (apod.media_type === "video") {
-    return `
+    // check if the photo of the day is actually type video!
+    if (apod.media_type === "video") {
+      return `
             <p>See today's featured video <a href="${apod.url}">here</a></p>
             <p>${apod.title}</p>
             <p>${apod.explanation}</p>
         `;
-  } else {
-    return `
+    } else {
+      return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
         `;
+    }
+  } catch (err) {
+    // console.log(err);
   }
 };
 
@@ -101,11 +105,15 @@ const ImageOfTheDay = (apod) => {
 const getImageOfTheDay = (state) => {
   let { apod } = state;
 
-  fetch(`http://localhost:3000/apod`)
-    .then((res) => res.json())
-    .then((apod) => updateStore(store, { apod }));
+  try {
+    fetch(`http://localhost:3000/apod`)
+      .then((res) => res.json())
+      .then((apod) => updateStore(store, { apod }));
 
-  return data;
+    return data;
+  } catch (err) {
+    //console.log(err);
+  }
 };
 
 // const button = document.getElementById("curiosity");
