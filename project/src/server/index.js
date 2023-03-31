@@ -28,12 +28,12 @@ app.get("/apod", async (req, res) => {
 
 app.post("/rover", async (req, res) => {
   const roverName = await req.body.roverName;
-  let date = "";
-  if (roverName === "spirit") {
-    date = "2005-5-30";
-  } else {
-    date = "2017-5-19";
-  }
+  // let date = "";
+  // if (roverName === "spirit") {
+  //   date = "2005-5-30";
+  // } else {
+  //   date = "2017-5-19";
+  // }
   //console.log(date);
   //console.log("This is the rover name: " + JSON.stringify(roverName));
   try {

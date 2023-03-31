@@ -95,13 +95,21 @@ function displayRoverManifesto(data) {
   containerDiv.appendChild(roverManifestoDiv);
 
   console.log("Yep, it was called! " + data.rover.name);
+  let avatarSource = "";
+  if (data.rover.name === "Curiosity") {
+    avatarSource =
+      "https://images-assets.nasa.gov/image/PIA20602/PIA20602~medium.jpg";
+  }
 
   let roverDetails = `<div class='rover-card'>
-        <h3>About this rover</h3>
-        <p>Name: ${data.rover.name}</p>
-        <p>Launch Date: ${data.rover.launch_date}</p>
-        <p>Landing Date: ${data.rover.landing_date}</p>
-        <p>Status: ${data.rover.status}</p>
+        <img src=${avatarSource}>
+        <div class="card-container">
+          <h3>About this rover</h3>
+          <h4><b>Name: ${data.rover.name}</b></h4>
+          <p>Launch Date: ${data.rover.launch_date}</p>
+          <p>Landing Date: ${data.rover.landing_date}</p>
+          <p>Status: ${data.rover.status}</p>
+        </div>
       </div>`;
 
   roverManifestoDiv.insertAdjacentHTML("beforeend", roverDetails);
@@ -121,7 +129,7 @@ function displayRoverPhotos(data) {
       <div class="grid-item">
         <h3>Photo ID: ${data[i].id}</h3>
         <img src="${data[i].img_src}">
-        <p>${data[i].earth_date}</p>
+        <p>Photo Date: ${data[i].earth_date}</p>
       </div>`;
     roverPhotosDiv.insertAdjacentHTML("beforeend", html);
   }
