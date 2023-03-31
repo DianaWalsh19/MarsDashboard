@@ -66,7 +66,6 @@ const ImageOfTheDay = (apod) => {
   const today = new Date();
   const photodate = new Date(apod.date);
   //console.log(photodate.getDate(), today.getDate());
-
   //console.log(photodate.getDate() === today.getDate());
   try {
     if (!apod || apod.date === today.getDate()) {
@@ -92,6 +91,23 @@ const ImageOfTheDay = (apod) => {
 };
 
 // Create Grid to display photos
+
+function displayRoverManifesto(data) {
+  let containerDiv = document.getElementById("container");
+  let roverManifestoDiv = document.createElement("div");
+  roverManifestoDiv.classList.add("roverManifesto");
+  containerDiv.appendChild(roverManifestoDiv);
+
+  console.log("Yep, it was called! " + data.rover.name);
+
+  let roverDetails = `<div class='rover-card'>
+        <h3>About this rover</h3>
+        <p>${data.rover.name}</p>
+        <p>${data.rover.landing_date}</p>
+      </div>`;
+
+  roverManifestoDiv.insertAdjacentHTML("beforeend", roverDetails);
+}
 
 function displayRoverPhotos(data) {
   const grid = document.getElementById("grid");
@@ -145,5 +161,6 @@ async function getRoverPhotos(roverName) {
   });
   const data = await response.json();
   console.log(data.roverPhotos.photos);
+  displayRoverManifesto(data.roverPhotos.photos[0]);
   displayRoverPhotos(data.roverPhotos.photos);
 }
