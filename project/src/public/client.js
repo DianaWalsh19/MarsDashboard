@@ -53,8 +53,6 @@ const ImageOfTheDay = (apod) => {
   // If image does not already exist, or it is not from today -- request it again
   const today = new Date();
   const photodate = new Date(apod.date);
-  //console.log(photodate.getDate(), today.getDate());
-  //console.log(photodate.getDate() === today.getDate());
   try {
     if (!apod || apod.date === today.getDate()) {
       getImageOfTheDay(store);
@@ -69,9 +67,20 @@ const ImageOfTheDay = (apod) => {
         `;
     } else {
       return `
-            <img src="${apod.image.url}"/>
-            <p>${apod.image.explanation}</p>
-        `;
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://images.nasa.gov/images/nasa_logo-mobile.png"/>
+            </div>
+            <div class="flip-card-back">
+              <img src="${apod.image.url}"/>
+            </div>
+          </div>
+        </div>
+        <div class="apod-explanation">
+          <p>${apod.image.explanation}</p>
+        </div>
+      `;
     }
   } catch (err) {
     // console.log(err);
