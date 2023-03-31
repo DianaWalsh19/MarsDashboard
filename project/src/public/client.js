@@ -99,6 +99,12 @@ function displayRoverManifesto(data) {
   if (data.rover.name === "Curiosity") {
     avatarSource =
       "https://images-assets.nasa.gov/image/PIA20602/PIA20602~medium.jpg";
+  } else if (data.rover.name === "Spirit") {
+    avatarSource =
+      "https://images-assets.nasa.gov/image/PIA05040/PIA05040~small.jpg";
+  } else if (data.rover.name === "Opportunity") {
+    avatarSource =
+      "https://images-assets.nasa.gov/image/PIA05309/PIA05309~orig.jpg";
   }
 
   let roverDetails = `<div class='rover-card'>
