@@ -35,10 +35,6 @@ const App = (state) => {
                 </p>
                 ${ImageOfTheDay(apod)}
             </section>
-            <section>
-              <div id="roverPhotos"></div>
-              <div id="grid"></div>
-            </section>
         </main>
         <footer></footer>
     `;
@@ -110,8 +106,11 @@ function displayRoverManifesto(data) {
 }
 
 function displayRoverPhotos(data) {
-  const grid = document.getElementById("grid");
-  grid.className = "grid-container";
+  let containerDiv = document.getElementById("container");
+  let roverPhotosDiv = document.createElement("div");
+  roverPhotosDiv.classList.add("rover-photos");
+  containerDiv.appendChild(roverPhotosDiv);
+
   // const tableSize = { x: 3, y: 3 };
   // let total = tableSize.x * tableSize.y;
 
@@ -121,9 +120,8 @@ function displayRoverPhotos(data) {
         <h3>${data[i].rover.name}</h3>
         <img src="${data[i].img_src}">
       </div>`;
-    const gridCell = cellMaker(grid, html);
+    roverPhotosDiv.insertAdjacentHTML("beforeend", html);
   }
-  grid.style.setProperty(`grid-template-columns`, `repeat(${data.length},2fr)`);
 }
 
 function cellMaker(parent, html) {
