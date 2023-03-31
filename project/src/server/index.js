@@ -13,9 +13,8 @@ app.use(bodyParser.json());
 
 app.use("/", express.static(path.join(__dirname, "../public")));
 
-// your API calls
+// API calls
 
-// example API call
 app.get("/apod", async (req, res) => {
   try {
     let image = await fetch(
@@ -37,7 +36,6 @@ app.post("/rover", async (req, res) => {
       })
       .then((data) => {
         roverPhotos = data;
-        //console.log(roverPhotos.photos[0]);
         res.send({ roverPhotos });
       });
   } catch (err) {

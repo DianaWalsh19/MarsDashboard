@@ -41,7 +41,6 @@ window.addEventListener("load", () => {
 const buttons = document.querySelectorAll("#curiosity, #opportunity, #spirit");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    // console.log("button pressed: " + button.id);
     getRoverPhotos(button.id);
   });
 });
