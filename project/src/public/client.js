@@ -45,9 +45,8 @@ buttons.forEach((button) => {
   });
 });
 
-// ------------------------------------------------------  COMPONENTS
+// Pure function provided as example
 
-// Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
   // If image does not already exist, or it is not from today -- request it again
   const today = new Date();
@@ -87,7 +86,7 @@ const ImageOfTheDay = (apod) => {
   }
 };
 
-// Function to clear parent element
+// Higher Order Function to clear parent element
 
 function emptyElement(element) {
   return function () {
@@ -108,7 +107,7 @@ function displayRoverManifesto(data) {
   roverManifestoDiv.classList.add("roverManifesto");
   containerDiv.appendChild(roverManifestoDiv);
 
-  console.log("Yep, it was called! " + data.rover.name);
+  // console.log("Yep, it was called! " + data.rover.name);
   let avatarSource = "";
   if (data.rover.name === "Curiosity") {
     avatarSource =
@@ -135,26 +134,30 @@ function displayRoverManifesto(data) {
   roverManifestoDiv.insertAdjacentHTML("beforeend", roverDetails);
 }
 
-function displayRoverPhotos(data) {
-  let containerDiv = document.getElementById("container");
-  let roverPhotosDiv = document.createElement("div");
-  roverPhotosDiv.classList.add("photo-grid");
-  containerDiv.appendChild(roverPhotosDiv);
+// Higher Order Function to display photos from rover
 
-  data.map((rover) => {
-    const html = `      
-    <div class="grid-item">
-      <h3>Photo ID: ${rover.id}</h3>
-      <img src="${rover.img_src}">
-      <p>Photo Date: ${rover.earth_date}</p>
-    </div>`;
-    roverPhotosDiv.insertAdjacentHTML("beforeend", html);
-  });
+function withPhotosDisplay(containerId) {
+  return function (data) {
+    let containerDiv = document.getElementById(containerId);
+    let roverPhotosDiv = document.createElement("div");
+    roverPhotosDiv.classList.add("photo-grid");
+    containerDiv.appendChild(roverPhotosDiv);
+
+    data.map((rover) => {
+      const html = `      
+        <div class="grid-item">
+          <h3>Photo ID: ${rover.id}</h3>
+          <img src="${rover.img_src}">
+          <p>Photo Date: ${rover.earth_date}</p>
+        </div>`;
+      roverPhotosDiv.insertAdjacentHTML("beforeend", html);
+    });
+  };
 }
 
 // ------------------------------------------------------  API CALLS
 
-// Example API call
+// APOD API
 const getImageOfTheDay = (state) => {
   let { apod } = state;
 
@@ -169,7 +172,7 @@ const getImageOfTheDay = (state) => {
   }
 };
 
-//An asynchronous function to fetch data from the API.
+//Rover Data API.
 async function getRoverPhotos(roverName) {
   const response = await fetch(`http://localhost:3000/rover`, {
     method: "POST",
@@ -179,7 +182,8 @@ async function getRoverPhotos(roverName) {
     body: JSON.stringify({ roverName }),
   });
   const data = await response.json();
-  console.log(data.roverPhotos.latest_photos);
+  // console.log(data.roverPhotos.latest_photos);
   displayRoverManifesto(data.roverPhotos.latest_photos[0]);
-  displayRoverPhotos(data.roverPhotos.latest_photos);
+  const displayPhotosInContainer = withPhotosDisplay("container");
+  displayPhotosInContainer(data.roverPhotos.latest_photos);
 }
