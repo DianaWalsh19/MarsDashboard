@@ -99,7 +99,7 @@ function displayRoverPhotos(data) {
   // const tableSize = { x: 3, y: 3 };
   // let total = tableSize.x * tableSize.y;
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < 16; i++) {
     const html = `      
       <div>
         <h3>${data[i].rover.name}</h3>
@@ -144,6 +144,6 @@ async function getRoverPhotos(roverName) {
     body: JSON.stringify({ roverName }),
   });
   const data = await response.json();
-  console.log(data.roverPhotos.photos[0]);
+  console.log(data.roverPhotos.photos);
   displayRoverPhotos(data.roverPhotos.photos);
 }
