@@ -28,16 +28,7 @@ app.get("/apod", async (req, res) => {
 
 app.post("/rover", async (req, res) => {
   const roverName = await req.body.roverName;
-  // let date = "";
-  // if (roverName === "spirit") {
-  //   date = "2005-5-30";
-  // } else {
-  //   date = "2017-5-19";
-  // }
-  //console.log(date);
-  //console.log("This is the rover name: " + JSON.stringify(roverName));
   try {
-    // const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${process.env.API_KEY}&max_results=5`;
     const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/latest_photos?api_key=${process.env.API_KEY}`;
     let roverPhotos = fetch(url)
       .then((res) => {
@@ -53,4 +44,4 @@ app.post("/rover", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Server up - Listening on port ${port}!`));

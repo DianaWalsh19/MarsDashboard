@@ -86,7 +86,7 @@ const ImageOfTheDay = (apod) => {
   }
 };
 
-// Clear parent element
+// Function to clear parent element
 
 function empty(element) {
   while (element.firstElementChild) {
@@ -136,25 +136,15 @@ function displayRoverPhotos(data) {
   roverPhotosDiv.classList.add("photo-grid");
   containerDiv.appendChild(roverPhotosDiv);
 
-  // const tableSize = { x: 3, y: 3 };
-  // let total = tableSize.x * tableSize.y;
-
-  for (let i = 0; i < data.length; i++) {
+  data.map((rover) => {
     const html = `      
-      <div class="grid-item">
-        <h3>Photo ID: ${data[i].id}</h3>
-        <img src="${data[i].img_src}">
-        <p>Photo Date: ${data[i].earth_date}</p>
-      </div>`;
+    <div class="grid-item">
+      <h3>Photo ID: ${rover.id}</h3>
+      <img src="${rover.img_src}">
+      <p>Photo Date: ${rover.earth_date}</p>
+    </div>`;
     roverPhotosDiv.insertAdjacentHTML("beforeend", html);
-  }
-}
-
-function cellMaker(parent, html) {
-  const cell = document.createElement("div");
-  cell.className = "grid-item";
-  cell.innerHTML = html;
-  return parent.appendChild(cell);
+  });
 }
 
 // ------------------------------------------------------  API CALLS

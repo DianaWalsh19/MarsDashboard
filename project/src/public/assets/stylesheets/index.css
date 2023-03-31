@@ -27,6 +27,7 @@ footer {
   margin: auto;
   max-width: 350px;
   max-height: 350px;
+  padding: 25px;
 }
 
 .grid-item img {
