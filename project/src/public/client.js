@@ -1,7 +1,5 @@
 let store = {
-  user: { name: "Student" },
   apod: "",
-  rovers: ["Curiosity", "Opportunity", "Spirit"],
 };
 
 // add our markup to the page
@@ -18,13 +16,11 @@ const render = async (root, state) => {
 
 // create content
 const App = (state) => {
-  let { rovers, apod } = state;
-  addRoverButtonListeners();
+  let { apod } = state;
 
   return `
         <header></header>
         <main>
-            ${Greeting(store.user.name)}
             <section>
                 <h3>Put things on the page!</h3>
                 
@@ -53,20 +49,16 @@ window.addEventListener("load", () => {
   render(root, store);
 });
 
+// listening for button clicks to the data from API
+const buttons = document.querySelectorAll("#curiosity, #opportunity, #spirit");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // console.log("button pressed: " + button.id);
+    getRoverPhotos(button.id);
+  });
+});
+
 // ------------------------------------------------------  COMPONENTS
-
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-  if (name) {
-    return `
-            <h1>Welcome, ${name}!</h1>
-        `;
-  }
-
-  return `
-        <h1>Hello!</h1>
-    `;
-};
 
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
@@ -99,50 +91,6 @@ const ImageOfTheDay = (apod) => {
   }
 };
 
-// ------------------------------------------------------  API CALLS
-
-// Example API call
-const getImageOfTheDay = (state) => {
-  let { apod } = state;
-
-  try {
-    fetch(`http://localhost:3000/apod`)
-      .then((res) => res.json())
-      .then((apod) => updateStore(store, { apod }));
-
-    return data;
-  } catch (err) {
-    //console.log(err);
-  }
-};
-
-function addRoverButtonListeners() {
-  const buttons = document.querySelectorAll(
-    "#curiosity, #opportunity, #spirit"
-  );
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      // console.log("button pressed: " + button.id);
-      getRoverPhotos(button.id);
-    });
-  });
-}
-
-//An asynchronous function to fetch data from the API.
-async function getRoverPhotos(roverName) {
-  const response = await fetch(`http://localhost:3000/rover`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ roverName }),
-  });
-  const data = await response.json();
-  // console.log(data.roverPhotos.photos[0]);
-  displayRoverPhotos(data.roverPhotos.photos);
-}
-
 // Create Grid to display photos
 
 function displayRoverPhotos(data) {
@@ -169,11 +117,33 @@ function cellMaker(parent, html) {
   return parent.appendChild(cell);
 }
 
-// TODO: An option to get fedeback from user
-// on what Rover they want to see.
+// ------------------------------------------------------  API CALLS
 
-// TODO: A function to send the selected rover to
-// the back end
+// Example API call
+const getImageOfTheDay = (state) => {
+  let { apod } = state;
 
-// TODO: A way to make the API requirement dynamic, so it
-// displays the different rovers
+  try {
+    fetch(`http://localhost:3000/apod`)
+      .then((res) => res.json())
+      .then((apod) => updateStore(store, { apod }));
+
+    return data;
+  } catch (err) {
+    //console.log(err);
+  }
+};
+
+//An asynchronous function to fetch data from the API.
+async function getRoverPhotos(roverName) {
+  const response = await fetch(`http://localhost:3000/rover`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ roverName }),
+  });
+  const data = await response.json();
+  console.log(data.roverPhotos.photos[0]);
+  displayRoverPhotos(data.roverPhotos.photos);
+}
