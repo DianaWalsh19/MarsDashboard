@@ -3,8 +3,9 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: Arial;
+  font-family: sans-serif;
   min-height: 100vh;
+  background: #f2f2f2;
 }
 
 header {
@@ -30,6 +31,14 @@ footer {
   margin: auto;
   max-width: 350px;
   padding: 15px;
+  transition: transform 0.2s;
+}
+
+.grid-item:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+  z-index: 10;
+  background-color: white;
 }
 
 .grid-item img {
