@@ -39,16 +39,20 @@ footer {
 
 /* -------------   APOD -----------------------  */
 
-.apod-div {
+#apod-div {
   margin: auto;
-  display: flex;
-  max-width: 60vw;
-  padding: 25px;
+  display: grid;
 }
 
-.apod-div img {
-  max-height: 100%;
-  max-width: 100%;
+#apod-div img {
+  max-height: 500px;
+  border: 5px solid #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  max-width: 60vw;
+  margin: 2%;
+  padding: 1%;
+  justify-self: center;
 }
 
 /* -------------   Container -----------------------  */
@@ -159,6 +163,7 @@ footer {
   .rover-card {
     display: flex;
     text-align: left;
+    max-width: 50vw;
   }
 }
 
