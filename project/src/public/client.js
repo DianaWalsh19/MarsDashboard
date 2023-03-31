@@ -22,18 +22,14 @@ const App = (state) => {
         <header></header>
         <main>
             <section>
-                <h3>Put things on the page!</h3>
-                
-                <p>Here is an example section.</p>
+                <h1>See Mars through the eyes of a NASA Rover</h1>
                 <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
+                    Space: the final frontier. These are the voyages of the NASA Rovers in Mars. 
+                    But before we get into it, let's check out NASA's image of the day:
                 </p>
-                ${ImageOfTheDay(apod)}
+                <div id="apod-div">
+                  ${ImageOfTheDay(apod)}
+                </div>
             </section>
         </main>
         <footer></footer>
@@ -77,7 +73,7 @@ const ImageOfTheDay = (apod) => {
         `;
     } else {
       return `
-            <img src="${apod.image.url}" height="350px" width="100%" />
+            <img src="${apod.image.url}" height="350px" />
             <p>${apod.image.explanation}</p>
         `;
     }
