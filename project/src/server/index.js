@@ -37,8 +37,8 @@ app.post("/rover", async (req, res) => {
   //console.log(date);
   //console.log("This is the rover name: " + JSON.stringify(roverName));
   try {
-    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${process.env.API_KEY}&max_results=5`;
-    // const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=2005-5-30&api_key=${process.env.API_KEY}`;
+    // const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${process.env.API_KEY}&max_results=5`;
+    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/latest_photos?api_key=${process.env.API_KEY}`;
     let roverPhotos = fetch(url)
       .then((res) => {
         return res.json();
