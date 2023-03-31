@@ -73,7 +73,8 @@ const ImageOfTheDay = (apod) => {
               <img src="https://images.nasa.gov/images/nasa_logo-mobile.png"/>
             </div>
             <div class="flip-card-back">
-              <img src="${apod.image.url}"/>
+              <img src="${apod.image.url}" style="
+              max-height: -webkit-fill-available;"/>
             </div>
           </div>
         </div>
