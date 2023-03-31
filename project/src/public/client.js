@@ -18,22 +18,18 @@ const render = async (root, state) => {
 const App = (state) => {
   let { apod } = state;
 
-  return `
-        <header></header>
-        <main>
-            <section>
-                <h1>See Mars through the eyes of a NASA Rover</h1>
-                <p>
-                    Space: the final frontier. These are the voyages of the NASA Rovers in Mars. 
-                    But before we get into it, let's check out NASA's image of the day:
-                </p>
-                <div id="apod-div">
-                  ${ImageOfTheDay(apod)}
-                </div>
-            </section>
-        </main>
-        <footer></footer>
-    `;
+  return `    
+    <section>
+        <h1>See Mars through the eyes of a NASA Rover</h1>
+        <p>
+            Space: the final frontier. These are the voyages of the NASA Rovers in Mars. 
+            But before we get into it, let's check out NASA's image of the day:
+        </p>
+        <div id="apod-div">
+          ${ImageOfTheDay(apod)}
+        </div>
+    </section>
+  `;
 };
 
 // listening for load event because page should load before any JS is called

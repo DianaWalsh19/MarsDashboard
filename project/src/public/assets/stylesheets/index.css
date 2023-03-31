@@ -1,6 +1,7 @@
 /* -------------------  MOBILE  --------------------- */
 
 body {
+  display: flex;
   flex-direction: column;
   font-family: Arial;
   min-height: 100vh;
@@ -11,12 +12,14 @@ header {
 }
 
 main {
-  flex: 1;
+  padding: 5%;
 }
 
 footer {
   /* footer styles */
 }
+
+/* -------------   Photo Grid -----------------------  */
 
 .photo-grid {
   display: flex;
@@ -26,14 +29,15 @@ footer {
 .grid-item {
   margin: auto;
   max-width: 350px;
-  max-height: 350px;
-  padding: 25px;
+  padding: 15px;
 }
 
 .grid-item img {
   max-height: 100%;
   max-width: 100%;
 }
+
+/* -------------   APOD -----------------------  */
 
 .apod-div {
   margin: auto;
@@ -47,6 +51,14 @@ footer {
   max-width: 100%;
 }
 
+/* -------------   Container -----------------------  */
+
+#container {
+  padding-top: 3%;
+  padding-bottom: 3%;
+  overflow: scroll;
+}
+
 /* -------------   Rover Card -----------------------  */
 
 .roverManifesto {
@@ -55,6 +67,8 @@ footer {
 }
 
 .rover-card {
+  background-color: bisque;
+  border: 5px solid #fff;
   width: 70vw;
   display: block;
   text-align: center;
@@ -69,6 +83,7 @@ footer {
   margin: 10px;
   margin-left: auto;
   margin-right: auto;
+  object-fit: contain;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -80,6 +95,8 @@ footer {
 .card-container {
   padding: 2px 16px;
 }
+
+/* -------------   Dropdown -----------------------  */
 
 /* Dropdown Button */
 .dropbtn {
@@ -94,6 +111,8 @@ footer {
 .dropdown {
   position: relative;
   display: inline-block;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* Dropdown Content (Hidden by Default) */
