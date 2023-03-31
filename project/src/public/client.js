@@ -98,8 +98,10 @@ function displayRoverManifesto(data) {
 
   let roverDetails = `<div class='rover-card'>
         <h3>About this rover</h3>
-        <p>${data.rover.name}</p>
-        <p>${data.rover.landing_date}</p>
+        <p>Name: ${data.rover.name}</p>
+        <p>Launch Date: ${data.rover.launch_date}</p>
+        <p>Landing Date: ${data.rover.landing_date}</p>
+        <p>Status: ${data.rover.status}</p>
       </div>`;
 
   roverManifestoDiv.insertAdjacentHTML("beforeend", roverDetails);
@@ -117,8 +119,9 @@ function displayRoverPhotos(data) {
   for (let i = 0; i < 16; i++) {
     const html = `      
       <div class="grid-item">
-        <h3>${data[i].rover.name}</h3>
+        <h3>Photo ID: ${data[i].id}</h3>
         <img src="${data[i].img_src}">
+        <p>${data[i].earth_date}</p>
       </div>`;
     roverPhotosDiv.insertAdjacentHTML("beforeend", html);
   }
