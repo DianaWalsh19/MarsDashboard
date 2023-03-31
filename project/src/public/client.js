@@ -108,7 +108,7 @@ function displayRoverManifesto(data) {
 function displayRoverPhotos(data) {
   let containerDiv = document.getElementById("container");
   let roverPhotosDiv = document.createElement("div");
-  roverPhotosDiv.classList.add("rover-photos");
+  roverPhotosDiv.classList.add("photo-grid");
   containerDiv.appendChild(roverPhotosDiv);
 
   // const tableSize = { x: 3, y: 3 };
@@ -116,7 +116,7 @@ function displayRoverPhotos(data) {
 
   for (let i = 0; i < 16; i++) {
     const html = `      
-      <div>
+      <div class="grid-item">
         <h3>${data[i].rover.name}</h3>
         <img src="${data[i].img_src}">
       </div>`;
