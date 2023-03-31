@@ -86,10 +86,19 @@ const ImageOfTheDay = (apod) => {
   }
 };
 
+// Clear parent element
+
+function empty(element) {
+  while (element.firstElementChild) {
+    element.firstElementChild.remove();
+  }
+}
+
 // Create Grid to display photos
 
 function displayRoverManifesto(data) {
   let containerDiv = document.getElementById("container");
+  empty(containerDiv);
   let roverManifestoDiv = document.createElement("div");
   roverManifestoDiv.classList.add("roverManifesto");
   containerDiv.appendChild(roverManifestoDiv);
