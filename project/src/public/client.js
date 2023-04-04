@@ -1,13 +1,15 @@
-let store = {
+import { Map } from "immutable";
+
+let store = Map({
   apod: "",
-};
+});
 
 // add our markup to the page
 const root = document.getElementById("root");
 
 const updateStore = (store, newState) => {
-  store = Object.assign(store, newState);
-  render(root, store);
+  const newStore = store.merge(newState);
+  render(root, newStore);
 };
 
 const render = async (root, state) => {
@@ -159,12 +161,12 @@ function withPhotosDisplay(containerId) {
 
 // APOD API
 const getImageOfTheDay = (state) => {
-  let { apod } = state;
+  const apod = state.get("apod");
 
   try {
     fetch(`http://localhost:3000/apod`)
       .then((res) => res.json())
-      .then((apod) => updateStore(store, { apod }));
+      .then((apod) => updateStore(store, Map({ apod })));
 
     return data;
   } catch (err) {
